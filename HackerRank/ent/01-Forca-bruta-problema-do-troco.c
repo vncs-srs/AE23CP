@@ -40,21 +40,33 @@ Sample Output 1
 #include <stdio.h>
 #include <stdlib.h>
 
-
-void troco(int valor)
+void troco(int valor,int moedas[],int n)
 {
+    int cont=0,i;
+    for (i = 0; i < n; i++)
+    {
+        cont;
+        while (valor >= moedas[i])
+        {
+            valor -= moedas[i];
+            cont++;
+        }
 
+    }
+    printf("%d\n",cont);
 }
 
 int main(void)
 {
-    int valor;
-
-
-    scanf("%d",& valor);
-
-    troco(valor);
+    int valor,n;
+    scanf("%d %d",&valor,&n);
+    int moedas[n];
+    for (int i = 0; i < n; i++)
+    {
+        scanf("%d",&moedas[i]);
+    }
     
-
+    troco(valor,moedas,n);
+    
     return 0;
 }

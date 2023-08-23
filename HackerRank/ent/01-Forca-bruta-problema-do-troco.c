@@ -40,7 +40,29 @@ Sample Output 1
 #include <stdio.h>
 #include <stdlib.h>
 
-void troco(int valor,int moedas[],int n)
+int troco(int valor,int moeda[], int n)
+{
+    int cont = 0;
+    int i;
+
+    for (i = 0; (i < n) && (valor > 0); i++)
+    {
+        cont += valor / moeda[i];
+        valor = valor % moeda[i];
+    }
+
+    if (valor == 0)
+    {
+        return cont;
+    }
+
+    else
+    {
+        return -1;
+    }
+}
+
+/*void troco(int valor,int moedas[],int n)
 {
     int cont=0,i;
     for (i = 0; i < n; i++)
@@ -54,7 +76,7 @@ void troco(int valor,int moedas[],int n)
 
     }
     printf("%d\n",cont);
-}
+}*/
 
 int main(void)
 {
@@ -66,7 +88,7 @@ int main(void)
         scanf("%d",&moedas[i]);
     }
     
-    troco(valor,moedas,n);
+    printf("%d",troco(valor,moedas,n));
     
     return 0;
 }

@@ -37,18 +37,39 @@ Sample Output 1
 #include <stdio.h>
 #include <stdlib.h>
 
+int compara(const void *a, const void *b) 
+{
+    return (*(int*)a - *(int*)b);
+}
+
 int main(void)
 {
-    int n,pbola,i;
+    int n, i, max = 0;
+    scanf("%d", &n);
 
-    scanf("%d",&n);
-    int posicao[n];
-    for (i = 0; i < n; i++)
+    int pokemons[n], pokebolas[n];
+    for(i = 0; i < n; i++) 
     {
-        scanf("%d",&posicao[i]);
+        scanf("%d", &pokemons[i]);
     }
-    
+    for(i = 0; i < n; i++) 
+    {
+        scanf("%d", &pokebolas[i]);
+    }
 
+    qsort(pokemons, n, sizeof(int), compara);
+    qsort(pokebolas, n, sizeof(int), compara);
+
+    for(i = 0; i < n; i++) 
+    {
+        int tempo = abs(pokemons[i] - pokebolas[i]);
+        if(tempo > max) 
+        {
+            max = tempo;
+        }
+    }
+
+    printf("%d\n", max);
 
     return 0;
 }

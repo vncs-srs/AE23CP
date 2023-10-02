@@ -45,24 +45,56 @@ Sample Output 2
 0*/
 
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 
-void capacidadeCarga(int l,int m, int n)
+void cargacaminhao(int tam, int carga1, int carga2)
 {
+    int aux = 0;
+    int a = 0;
+    int b = 0;
 
+    if(carga1 < carga2)
+    {
+        aux = carga1;
+        carga1 = carga2;
+        carga2 = aux;
+    }
 
+    int faltante;
+    a = tam/carga1;
+    faltante = tam % carga1;
 
+    while((faltante - carga2) >= 0 && faltante != 0)
+    {
+        b += 1;
+        faltante = faltante - carga2;
+    }
+    if(aux==0)
+    {
+        printf("%d\n",a);
+        printf("%d\n",b);
+        printf("%d\n",faltante);
+    }
+    else
+    {
+        printf("%d\n",b);
+        printf("%d\n",a);
+        printf("%d\n",faltante);
+    }
 }
 
-int main(void)
+int main(void) 
 {
-    int l,m,n;
+    int tam, carga1, carga2;
 
-    scanf("%d %d %d",&l,&m,&n);
-
-    capacidadeCarga(l,m,n);
+    scanf("%d",&tam);
+    scanf("%d",&carga1);
+    scanf("%d",&carga2);
+    cargacaminhao(tam,carga1,carga2);
 
     return 0;
 }
+
 
 

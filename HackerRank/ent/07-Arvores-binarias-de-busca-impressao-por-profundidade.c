@@ -219,34 +219,35 @@ NodeB * inserir(NodeB *tree, int key){
 
     return tree;
 }
-
-#define N 5
-
-int main(void) 
-{
-    NodeB *tree = criar(); // Cria uma nova árvore B vazia
-    int keys[] = {28, 12, 8, 45, 36, 41, 59, 48};
-    int numKeys = sizeof(keys) / sizeof(keys[0]);
-
-    // Insere as chaves na árvore B
-    for (int i = 0; i < numKeys; ++i) {
-        tree = inserir(tree, keys[i]);
+void imprimirProfundidade(NodeB* root, int profundidade_atual, int profundidade_alvo) {
+    if (root == NULL) {
+        return;
     }
 
-    // Realiza pesquisas na árvore B
-    int procurakey[] = {8, 15, 36, 59};
-    int numprocurakey = sizeof(procurakey) / sizeof(procurakey[0]);
+    if (profundidade_atual == profundidade_alvo) {
+        for (int i = 0; i < root->nro_chaves; i++) {
+            printf("%d ", root->chaves[i]);
+        }
+    } else {
+        for (int i = 0; i < root->nro_chaves + 1; i++) {
+            imprimirProfundidade(root->filhos[i], profundidade_atual + 1, profundidade_alvo);
+        }
+    }
+}
 
-    for (int i = 0; i < numprocurakey; ++i) 
-    {
-        if (pesquisar(procurakey[i], tree)) 
-            printf("%d \n", procurakey[i]);
+int main() {
+    int profundidade, p;
+    scanf("%d", &profundidade);
+    scanf("%d", &p);
+    int num[p];
+    NodeB* root = criar();
 
-        else 
-            printf("%d \n", procurakey[i]);
+    for (int i = 0; i < p; ++i) {
+        scanf("%d", &num[i]);
+        root = inserir(root, num[i]);
     }
 
-    liberar(tree); // Libera a memória alocada pela árvore B
-
+    imprimirProfundidade(root,1, profundidade);
+    free(root);
     return 0;
 }
